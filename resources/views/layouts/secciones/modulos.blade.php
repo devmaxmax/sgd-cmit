@@ -75,7 +75,7 @@
                                         @break
 
                                         @case('pausado')
-                                            <span class="badge badge-custom badge-secondary">Pausado</span>
+                                            <span class="badge bg-warning text-dark">Pausado</span>
                                         @break
 
                                         @case('desarrollo')
