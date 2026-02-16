@@ -28,7 +28,7 @@ class TicketsController extends Controller
             $query->where('estado', $request->estado);
         }
 
-        $listaTickets = $query->paginate(10);
+        $listaTickets = $query->orderByRaw("FIELD(prioridad, 'urgente', 'alta', 'media', 'baja')")->orderBy('id', 'desc')->paginate(10);
         $listaModulos = Modulo::orderBy('id', 'desc')->get();
 
         return view('layouts.secciones.tickets', compact('listaTickets', 'listaModulos'));
