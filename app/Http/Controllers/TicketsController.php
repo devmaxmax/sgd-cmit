@@ -14,7 +14,7 @@ class TicketsController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Ticket::orderBy('id', 'desc');
+        $query = Ticket::query();
 
         if ($request->filled('modulo_id')) {
             $query->where('modulo_id', $request->modulo_id);
