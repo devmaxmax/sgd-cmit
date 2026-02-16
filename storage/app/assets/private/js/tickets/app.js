@@ -93,12 +93,14 @@ document.getElementById('btn-buscar-tickets').addEventListener('click', () => {
     const modulo = document.getElementById('filtro-modulo').value;
     const prioridad = document.getElementById('filtro-prioridad').value;
     const estado = document.getElementById('filtro-estado').value;
+    const busqueda = document.getElementById('busqueda').value;
 
     const params = new URLSearchParams();
 
     if (modulo) params.append('modulo_id', modulo);
     if (prioridad) params.append('prioridad', prioridad);
     if (estado) params.append('estado', estado);
+    if (busqueda) params.append('busqueda', busqueda);
 
     window.location.href = `${window.location.pathname}?${params.toString()}`;
 });

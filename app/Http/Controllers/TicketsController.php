@@ -28,6 +28,14 @@ class TicketsController extends Controller
             $query->where('estado', $request->estado);
         }
 
+        if ($request->filled('busqueda')) {
+            $busqueda = $request->busqueda;
+            $query->where(function ($q) use ($busqueda) {
+                $q->where('titulo', 'like', '%' . $busqueda . '%')
+                  ->orWhere('descripcion', 'like', '%' . $busqueda . '%');
+            });
+        }
+
         $listaTickets = $query->orderByRaw("FIELD(prioridad, 'urgente', 'alta', 'media', 'baja')")->orderBy('id', 'asc')->paginate(10);
         $listaModulos = Modulo::orderBy('id', 'desc')->get();
 

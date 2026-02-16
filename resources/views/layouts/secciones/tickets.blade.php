@@ -47,7 +47,12 @@
                             <option value="terminado">Terminado</option>
                         </select>
                     </div>
-                    <div class="col-md-3 text-end">
+                    <div class="col-md-3">
+                        <label for="busqueda" class="form-label small text-muted fw-bold mb-1">Buscar:</label>
+                        <input type="text" class="form-control form-control-sm" id="busqueda"
+                            placeholder="Título o descripción..." value="{{ request('busqueda') }}">
+                    </div>
+                    <div class="col-md-12 text-end mt-3">
                         <button id="btn-buscar-tickets" class="btn btn-sm btn-primary px-4">
                             <i class="fas fa-search me-1"></i> Buscar
                         </button>
