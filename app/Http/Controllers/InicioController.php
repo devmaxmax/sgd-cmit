@@ -11,9 +11,9 @@ class InicioController extends Controller
 {
     public function index()
     {
-        $tickets = Ticket::where('estado', 'abierto')
-            ->limit(10)
+        $tickets = Ticket::with('modulo')
             ->orderBy('created_at', 'desc')
+            ->limit(5)
             ->get();
 
         $nroProyectos = Proyecto::whereIn('estado', ['activo', 'pausado', 'cerrado'])->count() ?? 0;
