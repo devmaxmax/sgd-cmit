@@ -19,36 +19,36 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="bg-dark border-end" id="sidebar-wrapper">
-            <div class="sidebar-heading text-white bg-primary p-3">
-                <img src="{{ asset('images/cmit.png') }}" alt="Logo" class="img-fluid">
+            <div class="sidebar-heading text-white bg-primary p-3 d-flex justify-content-center align-items-center" style="height: 60px;">
+                <img src="{{ asset('images/cmit.png') }}" alt="Logo" class="img-fluid sidebar-logo">
             </div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 {{ request()->routeIs('inicio') ? 'active' : '' }}"
-                    href="{{ route('inicio') }}">
-                    <i class="fas fa-home me-2"></i> Inicio
+                    href="{{ route('inicio') }}" title="Inicio">
+                    <i class="fas fa-home me-2"></i> <span class="nav-text">Inicio</span>
                 </a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 {{ request()->routeIs('proyectos') ? 'active' : '' }}"
-                    href="{{ route('proyectos') }}">
-                    <i class="fas fa-folder me-2"></i> Proyectos
+                    href="{{ route('proyectos') }}" title="Proyectos">
+                    <i class="fas fa-folder me-2"></i> <span class="nav-text">Proyectos</span>
                 </a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 {{ request()->routeIs('modulos') ? 'active' : '' }}"
-                    href="{{ route('modulos') }}">
-                    <i class="fas fa-cube me-2"></i> Módulos
+                    href="{{ route('modulos') }}" title="Módulos">
+                    <i class="fas fa-cube me-2"></i> <span class="nav-text">Módulos</span>
                 </a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 {{ request()->routeIs('tickets') ? 'active' : '' }}"
-                    href="{{ route('tickets') }}">
-                    <i class="fas fa-ticket-alt me-2"></i> Tickets
+                    href="{{ route('tickets') }}" title="Tickets">
+                    <i class="fas fa-ticket-alt me-2"></i> <span class="nav-text">Tickets</span>
                 </a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 {{ request()->routeIs('avances') ? 'active' : '' }}"
-                    href="{{ route('avances') }}">
-                    <i class="fas fa-chart-line me-2"></i> Avances
+                    href="{{ route('avances') }}" title="Avances">
+                    <i class="fas fa-chart-line me-2"></i> <span class="nav-text">Avances</span>
                 </a>
             </div>
             <div class="mt-auto p-3">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="btn btn-outline-danger w-100 btn-sm">
-                        <i class="fas fa-sign-out-alt me-2"></i> Salir
+                    <button type="submit" class="btn btn-outline-danger w-100 btn-sm" title="Salir">
+                        <i class="fas fa-sign-out-alt me-2"></i> <span class="nav-text">Salir</span>
                     </button>
                 </form>
             </div>

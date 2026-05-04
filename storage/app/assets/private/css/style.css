@@ -24,10 +24,12 @@ body {
 #sidebar-wrapper {
     min-height: 100vh;
     margin-left: -var(--sidebar-width);
-    transition: margin 0.25s ease-out;
+    transition: margin 0.25s ease-out, width 0.25s ease-out;
     background-color: #fff !important;
     border-right: 1px solid #e2e8f0 !important;
     width: var(--sidebar-width);
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 #sidebar-wrapper .sidebar-heading {
@@ -62,7 +64,41 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     }
 
     body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
-        margin-left: -var(--sidebar-width);
+        width: 80px;
+        margin-left: 0;
+    }
+
+    body.sb-sidenav-toggled .sidebar-heading {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+
+    body.sb-sidenav-toggled .nav-text {
+        display: none;
+    }
+
+    body.sb-sidenav-toggled .sidebar-heading .sidebar-logo {
+        width: 45px;
+    }
+
+    body.sb-sidenav-toggled .list-group-item {
+        text-align: center;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+
+    body.sb-sidenav-toggled .list-group-item i {
+        margin-right: 0 !important;
+        font-size: 1.25rem;
+    }
+
+    body.sb-sidenav-toggled .mt-auto {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+
+    body.sb-sidenav-toggled .btn-outline-danger i {
+        margin-right: 0 !important;
     }
 }
 
