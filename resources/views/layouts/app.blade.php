@@ -72,9 +72,28 @@
                                 <span class="nav-link text-secondary">Bienvenido,
                                     <strong>{{ Auth::user()->name }}</strong></span>
                             </li>
-                            <li class="nav-item">
-                                <div class="avatar-circle bg-primary text-white ms-2">
-                                    {{ substr(Auth::user()->name, 0, 1) }}</div>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="avatar-circle bg-primary text-white ms-2">
+                                        {{ substr(Auth::user()->name, 0, 1) }}
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#perfilModal">
+                                            <i class="fas fa-user-circle me-2 text-primary"></i> Perfil
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}" class="m-0 p-0">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item text-danger">
+                                                <i class="fas fa-sign-out-alt me-2"></i> Salir
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -98,6 +117,73 @@
             document.body.classList.toggle('sb-sidenav-toggled');
         });
     </script>
+
+    <!-- Modal de Perfil (Cambio de Contraseña) -->
+    <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="perfilModalLabel"><i class="fas fa-user-circle me-2"></i> Mi Perfil</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="{{ route('password.update') }}">
+                    @csrf
+                    @method('put')
+                    <div class="modal-body p-4">
+                        <p class="text-muted small mb-4">Actualiza tu contraseña. Asegúrate de usar una contraseña larga y segura.</p>
+
+                        <div class="mb-3">
+                            <label for="current_password" class="form-label fw-bold small text-secondary">Contraseña Actual</label>
+                            <input type="password" class="form-control" id="current_password" name="current_password" required>
+                            @error('current_password')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label fw-bold small text-secondary">Nueva Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                            @error('password')
+                                <span class="text-danger small">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label fw-bold small text-secondary">Confirmar Nueva Contraseña</label>
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-save me-1"></i> Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @if(session('status') === 'password-updated')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Contraseña actualizada',
+                text: 'Tu contraseña ha sido cambiada exitosamente.',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        });
+    </script>
+    @endif
+
+    @if ($errors->has('current_password') || $errors->has('password') || $errors->has('password_confirmation'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var myModal = new bootstrap.Modal(document.getElementById('perfilModal'));
+            myModal.show();
+        });
+    </script>
+    @endif
 </body>
 
 </html>
