@@ -12,39 +12,45 @@
                 </h2>
                 <p class="text-muted small mb-0">Registro cronológico de actividades y actualizaciones.</p>
             </div>
-            <form method="GET" action="{{ route('avances') }}" class="card mb-4 border shadow-sm" style="background-color: #f8f9fa;">
-                <div class="card-body p-3">
-                    <div class="row align-items-end">
-                        <div class="col-md-3">
-                            <label for="responsable" class="form-label small text-muted fw-bold mb-1">Responsable:</label>
-                            <input type="text" class="form-control form-control-sm" name="responsable" id="responsable" placeholder="Nombre..." value="{{ request('responsable') }}">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="estado" class="form-label small text-muted fw-bold mb-1">Estado del Ticket:</label>
-                            <select class="form-select form-select-sm" name="estado" id="estado">
-                                <option value="">Todos los Estados</option>
-                                <option value="desarrollo" {{ request('estado') == 'desarrollo' ? 'selected' : '' }}>En desarrollo</option>
-                                <option value="pausado" {{ request('estado') == 'pausado' ? 'selected' : '' }}>Pausado</option>
-                                <option value="terminado" {{ request('estado') == 'terminado' ? 'selected' : '' }}>Terminado</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="fecha_desde" class="form-label small text-muted fw-bold mb-1">Desde:</label>
-                            <input type="date" class="form-control form-control-sm" name="fecha_desde" id="fecha_desde" value="{{ request('fecha_desde') }}">
-                        </div>
-                        <div class="col-md-2">
-                            <label for="fecha_hasta" class="form-label small text-muted fw-bold mb-1">Hasta:</label>
-                            <input type="date" class="form-control form-control-sm" name="fecha_hasta" id="fecha_hasta" value="{{ request('fecha_hasta') }}">
-                        </div>
-                        <div class="col-md-2 text-end">
-                            <button type="submit" class="btn btn-sm btn-primary px-4 w-100">
-                                <i class="fas fa-search me-1"></i> Buscar
-                            </button>
-                        </div>
+        </div>
+
+        <form method="GET" action="{{ route('avances') }}" class="card mb-4 border shadow-sm" style="background-color: #f8f9fa;">
+            <div class="card-body p-3">
+                <div class="row align-items-end">
+                    <div class="col-md-3">
+                        <label for="responsable" class="form-label small text-muted fw-bold mb-1">Responsable:</label>
+                        <select class="form-select form-select-sm" name="responsable" id="responsable">
+                            <option value="">Todos los Responsables</option>
+                            @foreach($listaUsuarios as $usuario)
+                                <option value="{{ $usuario->id }}" {{ request('responsable') == $usuario->id ? 'selected' : '' }}>{{ $usuario->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="estado" class="form-label small text-muted fw-bold mb-1">Estado del Ticket:</label>
+                        <select class="form-select form-select-sm" name="estado" id="estado">
+                            <option value="">Todos los Estados</option>
+                            <option value="desarrollo" {{ request('estado') == 'desarrollo' ? 'selected' : '' }}>En desarrollo</option>
+                            <option value="pausado" {{ request('estado') == 'pausado' ? 'selected' : '' }}>Pausado</option>
+                            <option value="terminado" {{ request('estado') == 'terminado' ? 'selected' : '' }}>Terminado</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="fecha_desde" class="form-label small text-muted fw-bold mb-1">Desde:</label>
+                        <input type="date" class="form-control form-control-sm" name="fecha_desde" id="fecha_desde" value="{{ request('fecha_desde') }}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="fecha_hasta" class="form-label small text-muted fw-bold mb-1">Hasta:</label>
+                        <input type="date" class="form-control form-control-sm" name="fecha_hasta" id="fecha_hasta" value="{{ request('fecha_hasta') }}">
+                    </div>
+                    <div class="col-md-2 text-end">
+                        <button type="submit" class="btn btn-sm btn-primary px-4 w-100">
+                            <i class="fas fa-search me-1"></i> Buscar
+                        </button>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
 
         <!-- Resultados -->
         <div class="card-custom p-0">

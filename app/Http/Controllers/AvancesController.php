@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Avance;
+use App\Models\User;
 use App\Http\Requests\GuardarAvanceRequest;
 
 use Illuminate\Http\Request;
@@ -14,8 +15,8 @@ class AvancesController extends Controller
         $query = Avance::with(['ticket.user']);
 
         if ($request->filled('responsable')) {
-            $query->whereHas('ticket.user', function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->responsable . '%');
+            $query->whereHas('ticket', function ($q) use ($request) {
+                $q->where('user_id', $request->responsable);
             });
         }
 
@@ -34,8 +35,9 @@ class AvancesController extends Controller
         }
 
         $listaAvances = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+        $listaUsuarios = User::orderBy('name')->get();
 
-        return view('layouts.secciones.avances', compact('listaAvances'));
+        return view('layouts.secciones.avances', compact('listaAvances', 'listaUsuarios'));
     }
 
     public function store(GuardarAvanceRequest $request)
