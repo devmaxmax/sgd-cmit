@@ -15,8 +15,8 @@ class AvancesController extends Controller
         $query = Avance::with(['ticket.user']);
 
         if ($request->filled('responsable')) {
-            $query->whereHas('ticket', function ($q) use ($request) {
-                $q->where('user_id', $request->responsable);
+            $query->whereHas('ticket.user', function ($q) use ($request) {
+                $q->where('users.id', $request->responsable);
             });
         }
 
