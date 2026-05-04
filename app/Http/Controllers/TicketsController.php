@@ -14,7 +14,7 @@ class TicketsController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Ticket::with('user');
+        $query = Ticket::with('user')->withCount('avances');
 
         if ($request->filled('modulo_id')) {
             $query->where('modulo_id', $request->modulo_id);

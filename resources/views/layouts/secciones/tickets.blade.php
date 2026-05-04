@@ -81,7 +81,12 @@
                             <tr data-modulo-id="{{ $ticket->modulo_id }}" data-prioridad="{{ $ticket->prioridad }}"
                                 data-estado="{{ $ticket->estado }}">
                                 <td class="fw-bold text-dark">#T-{{ $ticket->id }}</td>
-                                <td class="fw-bold">{{ $ticket->titulo }}</td>
+                                <td class="fw-bold">
+                                    {{ $ticket->titulo }}
+                                    @if($ticket->avances_count > 0)
+                                        <span class="badge rounded-pill bg-primary ms-1" style="font-size: 0.7em; vertical-align: middle;" title="Cantidad de avances">{{ $ticket->avances_count }}</span>
+                                    @endif
+                                </td>
                                 <td><span class="badge badge-custom badge-info">{{ $ticket->modulo->proyecto->nombre }} /
                                         {{ $ticket->modulo->nombre }}</span></td>
                                 <td>{{ $ticket->user ? $ticket->user->name : 'N/A' }}</td>
