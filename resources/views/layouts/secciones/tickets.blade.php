@@ -69,6 +69,7 @@
                             <th class="border-0">ID</th>
                             <th class="border-0">Título</th>
                             <th class="border-0">Proyecto/Módulo</th>
+                            <th class="border-0">Creador</th>
                             <th class="border-0">Prioridad</th>
                             <th class="border-0">Estado</th>
                             <th class="border-0">Inicio</th>
@@ -83,6 +84,7 @@
                                 <td class="fw-bold">{{ $ticket->titulo }}</td>
                                 <td><span class="badge badge-custom badge-info">{{ $ticket->modulo->proyecto->nombre }} /
                                         {{ $ticket->modulo->nombre }}</span></td>
+                                <td>{{ $ticket->user ? $ticket->user->name : 'N/A' }}</td>
                                 <td>
                                     @switch($ticket->prioridad)
                                         @case('urgente')

@@ -16,7 +16,14 @@ class Ticket extends Model
         'estado',
         'prioridad',
         'modulo_id',
+        'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function modulo()
     {
         return $this->belongsTo(Modulo::class);

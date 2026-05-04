@@ -14,7 +14,7 @@ class TicketsController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Ticket::query();
+        $query = Ticket::with('user');
 
         if ($request->filled('modulo_id')) {
             $query->where('modulo_id', $request->modulo_id);
@@ -44,9 +44,10 @@ class TicketsController extends Controller
 
     public function store(GuardarTicketRequest $request)
     {
-        $ticket = $request->validated();
+        $ticketData = $request->validated();
+        $ticketData['user_id'] = auth()->id();
 
-        $ticket = Ticket::create($ticket);
+        $ticket = Ticket::create($ticketData);
 
         if ($request->hasFile('imagenes')) {
             foreach ($request->file('imagenes') as $imagen) {
@@ -66,7 +67,7 @@ class TicketsController extends Controller
 
     public function show($id)
     {
-        $ticket = Ticket::with('imagenes', 'modulo')->findOrFail($id);
+        $ticket = Ticket::with('imagenes', 'modulo', 'user')->findOrFail($id);
         return response()->json($ticket);
     }
 
@@ -129,7 +130,7 @@ class TicketsController extends Controller
 
     public function verTicket($id)
     {
-        $ticket = Ticket::with('imagenes', 'modulo')->findOrFail($id);
+        $ticket = Ticket::with('imagenes', 'modulo', 'user')->findOrFail($id);
         return response()->json($ticket);
     }
 }
