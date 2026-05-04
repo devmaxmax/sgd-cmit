@@ -42,7 +42,7 @@ body {
 }
 
 #sidebar-wrapper .list-group {
-    width: var(--sidebar-width);
+    width: 100%;
 }
 
 #page-content-wrapper {
