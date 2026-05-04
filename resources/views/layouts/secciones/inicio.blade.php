@@ -87,9 +87,14 @@
 
     <!-- Latest Tickets Table -->
     <div class="card-custom mb-4 p-0">
-        <div class="p-3 border-bottom d-flex justify-content-between align-items-center bg-light rounded-top">
-            <h5 class="mb-0 fw-bold text-secondary ps-2">Últimos Tickets</h5>
-            <a href="{{ route('tickets') }}" class="btn btn-sm btn-link text-decoration-none fw-bold">Ver todos</a>
+        <div class="p-3 border-bottom bg-light rounded-top">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 fw-bold text-secondary ps-2">Últimos Tickets</h5>
+                <a href="{{ route('tickets') }}" class="btn btn-sm btn-link text-decoration-none fw-bold">Ver todos</a>
+            </div>
+            <div class="ps-2 mt-1 text-muted small">
+                El número junto al título indica la cantidad de avances que tiene el ticket.
+            </div>
         </div>
         <div class="table-responsive">
             <table class="table table-custom table-hover align-middle mb-0">
@@ -106,7 +111,12 @@
                     @foreach ($tickets as $ticket)
                     <tr>
                         <td class="fw-bold text-dark">#T-{{ $ticket->id }}</td>
-                        <td>{{ $ticket->titulo }}</td>
+                        <td>
+                            {{ $ticket->titulo }}
+                            @if($ticket->avances_count > 0)
+                                <span class="badge rounded-pill bg-primary ms-1" style="font-size: 0.7em; vertical-align: middle;">{{ $ticket->avances_count }}</span>
+                            @endif
+                        </td>
                         <td><span class="badge badge-custom badge-info">{{ $ticket->modulo->nombre }}</span></td>
                         <td><span class="badge badge-custom badge-warning">{{ $ticket->estado }}</span></td>
                         <td>{{ $ticket->created_at->format('d/m/Y H:i') }}</td>

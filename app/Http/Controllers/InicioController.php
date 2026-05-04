@@ -11,7 +11,7 @@ class InicioController extends Controller
 {
     public function index()
     {
-        $tickets = Ticket::with('modulo')
+        $tickets = Ticket::with('modulo')->withCount('avances')
             ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
