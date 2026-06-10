@@ -18,7 +18,7 @@ class InicioController extends Controller
 
         $nroProyectos = Proyecto::whereIn('estado', ['activo', 'pausado', 'cerrado'])->count() ?? 0;
         $nroModulos = Modulo::whereIn('estado', ['relevamiento', 'pausado', 'desarrollo', 'terminado'])->count() ?? 0;
-        $nroTickets = Ticket::whereIn('estado', ['activo', 'pausado', 'cerrado'])->count() ?? 0;
+        $nroTickets = Ticket::where('estado','activo')->count() ?? 0;
         $nroUrgentes = Ticket::where('prioridad', 'urgente')->where('estado','desarrollo')->count() ?? 0;
 
         
